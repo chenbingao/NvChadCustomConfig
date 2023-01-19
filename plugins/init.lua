@@ -25,7 +25,6 @@ return {
         "shellcheck",
 
         -- rust
-        "rustfmt",
         "rust-analyzer",
       },
     },
@@ -39,7 +38,7 @@ return {
     end,
   },
 
-  ["simrat39/rust-tools.nvim"] = {},
+  -- ["simrat39/rust-tools.nvim"] = {},
 
   ["jose-elias-alvarez/null-ls.nvim"] = {
     after = "nvim-lspconfig",
