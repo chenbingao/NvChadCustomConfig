@@ -25,7 +25,7 @@ local sources = {
   },
 
   --rust
-  b.formatting.rustfmt,
+  -- b.formatting.rustfmt,
 
   -- Lua
   b.formatting.stylua,

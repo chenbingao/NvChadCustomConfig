@@ -10,9 +10,22 @@ local servers = {
   "rust_analyzer",
 }
 
+local languages = {
+  rust_analyzer = require "custom.languages.rust",
+}
+
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
+  local module = languages[lsp]
+  if module then
+    print(module)
+    lspconfig[lsp].setup {
+      on_attach = module.on_attach,
+      capabilities = capabilities,
+    }
+  else
+    lspconfig[lsp].setup {
+      on_attach = on_attach,
+      capabilities = capabilities,
+    }
+  end
 end
