@@ -7,7 +7,6 @@ local servers = {
   "html",
   "cssls",
   "clangd",
-  "rust_analyzer",
 }
 
 local languages = require "custom.languages"
