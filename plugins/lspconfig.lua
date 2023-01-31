@@ -10,9 +10,7 @@ local servers = {
   "rust_analyzer",
 }
 
-local languages = {
-  rust_analyzer = require "custom.languages.rust",
-}
+local languages = require "custom.languages"
 
 for _, lsp in ipairs(servers) do
   local module = languages[lsp]

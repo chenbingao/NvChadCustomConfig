@@ -1,4 +1,11 @@
-return {
+local overrides = require "custom.plugins.overrides"
+
+-- @type {[PluginName]: PluginConfig|false}
+local plugins = {
+
+  -- ["goolord/alpha-nvim"] = { disable = false } -- enables dashboard
+
+  -- Override plugin definition options
   ["neovim/nvim-lspconfig"] = {
     config = function()
       require "plugins.configs.lspconfig"
@@ -6,28 +13,17 @@ return {
     end,
   },
 
+  -- overrde plugin configs
+  ["nvim-treesitter/nvim-treesitter"] = {
+    override_options = overrides.treesitter,
+  },
+
   ["williamboman/mason.nvim"] = {
-    override_options = {
-      ensure_installed = {
-        -- lua stuff
-        "lua-language-server",
+    override_options = overrides.mason,
+  },
 
-        -- web dev
-        "css-lsp",
-        "html-lsp",
-        "typescript-language-server",
-        "deno",
-        "emmet-ls",
-        "json-lsp",
-
-        -- shell
-        "shfmt",
-        "shellcheck",
-
-        -- rust
-        "rust-analyzer",
-      },
-    },
+  ["nvim-tree/nvim-tree.lua"] = {
+    override_options = overrides.nvimtree,
   },
 
   -- Install a plugin
@@ -38,12 +34,31 @@ return {
     end,
   },
 
-  -- ["simrat39/rust-tools.nvim"] = {},
+  ["simrat39/rust-tools.nvim"] = {
+    after = "nvim-lspconfig",
+    config = function()
+      require "custom.plugins.rust-tools"
+    end,
+  },
 
+  -- Debugging
+  ["mfussenegger/nvim-dap"] = {
+    after = "nvim-lspconfig",
+  },
+
+  -- automatically highlighting same word
+  ["dominikduda/vim_current_word"] = {},
+
+  -- code formatting, linting etc
   ["jose-elias-alvarez/null-ls.nvim"] = {
     after = "nvim-lspconfig",
     config = function()
       require "custom.plugins.null-ls"
     end,
   },
+
+  -- remove plugin
+  -- ["hrsh7th/cmp-path"] = false,
 }
+
+return plugins
