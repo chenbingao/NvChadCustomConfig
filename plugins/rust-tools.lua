@@ -10,9 +10,11 @@ rt.setup {
       -- Enable inlay hints auto update and set them for all the buffers
       rt.inlay_hints.enable()
       -- RustRunnables
-      vim.keymap.set("n", "<Leader>r", rt.runnables.runnables, { buffer = bufnr })
+      vim.keymap.set("n", ",ru", rt.runnables.runnables, { buffer = bufnr })
       -- RustExpandMacro
       vim.keymap.set("n", ",em", rt.expand_macro.expand_macro, { buffer = bufnr })
+      -- lsp rename
+      vim.keymap.set("n", "<Leader>lr", vim.lsp.buf.rename, { buffer = bufnr })
     end,
   },
 }
